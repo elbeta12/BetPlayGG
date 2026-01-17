@@ -1,0 +1,1193 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Liga BetPlay</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg-primary: #0a0e27;
+  --bg-secondary: #0f1435;
+  --bg-card: #151a3f;
+  --bg-hover: #1a2050;
+  --text-primary: #ffffff;
+  --text-secondary: #a0aec0;
+  --text-muted: #718096;
+  --accent-primary: #ffd700;
+  --accent-secondary: #0052cc;
+  --accent-tertiary: #00c896;
+  --border-color: #2d3748;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.15);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.25);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.35);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1f4d 100%);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 14, 39, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  object-fit: contain;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  padding: 2px;
+}
+
+.logo-text h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--accent-primary), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.logo-text p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: -2px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--bg-secondary);
+  padding: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+}
+
+.nav-btn {
+  padding: 0.625rem 1.25rem;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.nav-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn.active {
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  color: var(--bg-primary);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.discord-link {
+  padding: 0.625rem 1.25rem;
+  background: #5865f2;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  font-size: 0.875rem;
+}
+
+.discord-link:hover {
+  background: #4752c4;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.section {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid var(--accent-primary);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin-bottom: 1rem;
+}
+
+.hero h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--accent-primary), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  line-height: 1.8;
+  max-width: 900px;
+  margin: 1rem auto;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-md);
+  margin: -2rem -2rem 1.5rem -2rem;
+}
+
+.card-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--bg-primary);
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-secondary);
+}
+
+thead {
+  background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+thead th {
+  padding: 1rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--bg-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+tbody td {
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+}
+
+tbody td:first-child {
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.team-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: left !important;
+}
+
+.team-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: white;
+  padding: 4px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.team-logo:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.team-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.points {
+  font-weight: 800;
+  font-size: 1.125rem;
+  color: var(--accent-primary);
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.match-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: var(--transition);
+}
+
+.match-card:hover {
+  background: var(--bg-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.match-team {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.match-team.away {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.match-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: white;
+  padding: 3px;
+  box-shadow: var(--shadow-sm);
+}
+
+.match-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+}
+
+.match-vs {
+  font-weight: 800;
+  color: var(--text-muted);
+  min-width: 60px;
+  text-align: center;
+}
+
+.match-score {
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  color: var(--bg-primary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+  font-size: 1.125rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.match-info {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  min-width: 100px;
+}
+
+.match-date {
+  font-weight: 600;
+}
+
+.match-time {
+  font-size: 0.8125rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.card-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: var(--transition);
+}
+
+.card-item:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-md);
+}
+
+.card-icon {
+  width: 50px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.card-info {
+  flex: 1;
+}
+
+.card-player {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.card-club {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-club-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 2px;
+}
+
+.card-date {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.sponsor-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16/10;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.sponsor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-primary);
+}
+
+.sponsor-img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  filter: brightness(0.9);
+  transition: var(--transition);
+}
+
+.sponsor-card:hover .sponsor-img {
+  filter: brightness(1.1);
+  transform: scale(1.05);
+}
+
+.info-card {
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.info-card h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.info-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.info-card p:last-child {
+  margin-bottom: 0;
+}
+
+.info-card b {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+footer {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .nav-tabs {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero h2 {
+    font-size: 1.75rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .match-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .match-team.away {
+    flex-direction: row;
+  }
+
+  table {
+    font-size: 0.875rem;
+  }
+
+  thead th, tbody td {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text h1 {
+    font-size: 1.25rem;
+  }
+
+  .nav-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<header class="header">
+  <div class="header-content">
+    <div class="logo-section">
+      <img class="logo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/BetPlay-Dimayor_logo.svg/1920px-BetPlay-Dimayor_logo.svg.png" alt="BetPlay">
+      <div class="logo-text">
+        <h1>Liga BetPlay</h1>
+        <p>Dimayor 2025</p>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <nav class="nav-tabs" id="navTabs">
+      <button class="nav-btn active" data-section="inicio">Inicio</button>
+      <button class="nav-btn" data-section="tablas">Tablas</button>
+      <button class="nav-btn" data-section="jornadas">Jornadas</button>
+      <button class="nav-btn" data-section="stats">Estadísticas</button>
+      <button class="nav-btn" data-section="tarjetas">Tarjetas</button>
+      <button class="nav-btn" data-section="afiliados">Afiliados</button>
+    </nav>
+<a class="discord-link" href="https://discord.gg/Q5KWpsAQVv" target="_blank">Discord</a>
+  </div>
+</header>
+
+<section id="inicio" class="section active">
+  <div class="container">
+    <div class="hero">
+      <div class="hero-content">
+        <span class="badge"> Temporada 1</span>
+        <h2>¡Bienvenido a la Liga BetPlay</h2>
+        <p>La máxima competición del Haxball Profesional Colombiano te espera con toda la emoción, rivalidades históricas y momentos inolvidables. Sigue en vivo las tablas de posiciones, resultados de cada jornada, estadísticas de los mejores jugadores y toda la información oficial del torneo.</p>
+        <p>Cada partido es una historia, cada gol una celebración. Únete a la pasión del fútbol colombiano y vive la intensidad de la Liga BetPlay DIMAYOR 2025.</p>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3>Guia</h3>
+      <p>En la sección de <b>Tablas de Posiciones</b> encontrarás la clasificación actualizada de todos los equipos de Primera y Segunda División, ordenados por puntos. En caso de empate, se aplican criterios como diferencia de goles y resultados directos entre equipos.</p>
+      <p>El apartado de <b>Jornadas</b> mantiene el registro histórico completo de todos los partidos disputados, permitiéndote consultar resultados anteriores y revivir los momentos más emocionantes de la temporada.</p>
+      <p>En <b>Estadísticas</b> podrás consultar los rankings de goleadores, asistidores, porteros con vallas invictas y otros datos relevantes que definen a las figuras del campeonato.</p>
+      <p>La sección de <b>Tarjetas</b> muestra el historial disciplinario completo, con todas las amonestaciones y expulsiones registradas durante el torneo.</p>
+      <p>Finalmente, en <b>Afiliados</b> conocerás los patrocinadores oficiales y aliados que respaldan el desarrollo del fútbol profesional colombiano.</p>
+    </div>
+  </div>
+</section>
+
+<section id="tablas" class="section">
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h3>Primera División </h3>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th style="text-align:left">Equipo</th>
+              <th>PJ</th>
+              <th>G</th>
+              <th>E</th>
+              <th>P</th>
+              <th>GF</th>
+              <th>GC</th>
+              <th>DG</th>
+              <th>Pts</th>a 
+            </tr>
+          </thead>
+          <tbody id="tablaPrimera"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Segunda División - Torneo BetPlay</h3>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th style="text-align:left">Equipo</th>
+              <th>PJ</th>
+              <th>G</th>
+              <th>E</th>
+              <th>P</th>
+              <th>GF</th>
+              <th>GC</th>
+              <th>DG</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody id="tablaSegunda"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="jornadas" class="section">
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h3>Jornada Actual - Primera División</h3>
+      </div>
+      <div class="grid grid-2" id="jornadasPrimera"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Jornada Actual - Segunda División</h3>
+      </div>
+      <div class="grid grid-2" id="jornadasSegunda"></div>
+    </div>
+  </div>
+</section>
+
+<section id="stats" class="section">
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h3>Top 5 Goleadores</h3>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th style="text-align:left">Jugador</th>
+              <th>Equipo</th>
+              <th>Goles</th>
+            </tr>
+          </thead>
+          <tbody id="tablaGoleadores"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Top 5 Asistencias</h3>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th style="text-align:left">Jugador</th>
+              <th>Equipo</th>
+              <th>Asistencias</th>
+            </tr>
+          </thead>
+          <tbody id="tablaAsistencias"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Top 5 Porterías en Cero</h3>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th style="text-align:left">Portero</th>
+              <th>Equipo</th>
+              <th>Vallas Invictas</th>
+            </tr>
+          </thead>
+          <tbody id="tablaCS"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tarjetas" class="section">
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h3>Historial de Tarjetas</h3>
+      </div>
+      <div class="cards-grid" id="tarjetasContainer"></div>
+    </div>
+  </div>
+</section>
+
+<section id="afiliados" class="section">
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h3>Patrocinadores Oficiales</h3>
+      </div>
+      <div class="sponsors-grid" id="afiliadosContainer"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  HaxCloud | Betplay
+</footer>
+
+<script>
+// LOGOS DE EQUIPOS
+const LOGOS = {
+  // Primera División
+  NAL: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Atl%C3%A9tico_Nacional.png/250px-Atl%C3%A9tico_Nacional.png",
+  MIL: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Escudo_de_Millonarios_F%C3%BAtbol_Club.svg/1024px-Escudo_de_Millonarios_F%C3%BAtbol_Club.svg.png",
+  AME: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Escudo_del_Am%C3%A9rica_de_Cali.svg/1022px-Escudo_del_Am%C3%A9rica_de_Cali.svg.png",
+  JUN: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Escudo_de_Atl%C3%A9tico_Junior.svg/1793px-Escudo_de_Atl%C3%A9tico_Junior.svg.png",
+  CAL: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Escudo_Deportivo_Cali.png",
+  SFE: "https://upload.wikimedia.org/wikipedia/commons/5/58/Escudo_de_Independiente_Santa_Fe.png",
+  TOL: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Escudo_del_Deportes_Tolima.svg",
+  ONC: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_Once_Caldas.png/250px-Logo_Once_Caldas.png",
+  PAS: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Deportivo_Pasto_logo.png",
+  EQU: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/La_Equidad_Seguros_logo.svg/1091px-La_Equidad_Seguros_logo.svg.png",
+  ENV: "https://upload.wikimedia.org/wikipedia/en/4/4e/Envigado_FC_logo_2018.png",
+  BUC: "https://upload.wikimedia.org/wikipedia/commons/b/b0/Atl%C3%A9ticoBucaramanga.png",
+  AGU: "https://upload.wikimedia.org/wikipedia/en/a/aa/LogoAguilasPereira.png",
+  MED: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Escudo_del_Deportivo_Independiente_Medell%C3%ADn.png/250px-Escudo_del_Deportivo_Independiente_Medell%C3%ADn.png",
+  PER: "https://upload.wikimedia.org/wikipedia/commons/d/db/Corpereira2019.png",
+  FOR: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Escudo_de_Fortaleza_CEIF.png/250px-Escudo_de_Fortaleza_CEIF.png",
+
+  // Segunda División
+  UNI: "https://upload.wikimedia.org/wikipedia/commons/2/27/Escudo_del_Uni%C3%B3n_Magdalena_F%C3%BAtbol_Club.png",
+  CUC: "https://upload.wikimedia.org/wikipedia/commons/7/73/C%C3%BAcuta_Deportivo_Centenario_2024.png",
+  HUI: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Escudo_de_Atl%C3%A9tico_Huila.svg/250px-Escudo_de_Atl%C3%A9tico_Huila.svg.png",
+  BOY: "https://upload.wikimedia.org/wikipedia/en/0/04/Boyac%C3%A1_Chic%C3%B3_FC.png",
+  PET: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/EscudoAlianzaPetrolera.png/250px-EscudoAlianzaPetrolera.png",
+  LLA: "https://upload.wikimedia.org/wikipedia/en/3/3e/Llaneros_F.C.png",
+  QUI: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/ESCUDO_DEP_QUINDIO_2023.png/250px-ESCUDO_DEP_QUINDIO_2023.png"
+};
+
+// ICONOS DE TARJETAS
+const CARD_ICONS = {
+  yellow: "https://cdn-icons-png.flaticon.com/512/8676/8676804.png",
+  red: "https://cdn-icons-png.flaticon.com/512/5174/5174171.png"
+};
+
+// DATOS PRIMERA DIVISIÓN
+const PRIMERA_DIVISION = [
+  { nombre: "Atlético Nacional", logo: LOGOS.NAL, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Millonarios FC", logo: LOGOS.MIL, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "América de Cali", logo: LOGOS.AME, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Junior FC", logo: LOGOS.JUN, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Deportivo Cali", logo: LOGOS.CAL, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Independiente Santa Fe", logo: LOGOS.SFE, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Deportes Tolima", logo: LOGOS.TOL, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Once Caldas", logo: LOGOS.ONC, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Deportivo Pasto", logo: LOGOS.PAS, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "La Equidad", logo: LOGOS.EQU, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Envigado FC", logo: LOGOS.ENV, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Atlético Bucaramanga", logo: LOGOS.BUC, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Águilas Doradas", logo: LOGOS.AGU, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Deportivo Medellín", logo: LOGOS.MED, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Deportivo Pereira", logo: LOGOS.PER, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Fortaleza CEIF", logo: LOGOS.FOR, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 }
+];
+
+// DATOS SEGUNDA DIVISIÓN
+const SEGUNDA_DIVISION = [
+  { nombre: "Unión Magdalena", logo: LOGOS.UNI, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Cúcuta Deportivo", logo: LOGOS.CUC, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Atlético Huila", logo: LOGOS.HUI, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Boyacá Chicó", logo: LOGOS.BOY, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Alianza Petrolera", logo: LOGOS.PET, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Llaneros FC", logo: LOGOS.LLA, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 },
+  { nombre: "Deportes Quindío", logo: LOGOS.QUI, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dg: 0, pts: 0 }
+];
+
+// JORNADAS PRIMERA DIVISIÓN
+const JORNADAS_PRIMERA = [
+  { local: "NAL", logoLocal: LOGOS.NAL, visitante: "MIL", logoVisit: LOGOS.MIL, fecha: "20/01/2025", hora: "19:00", resultado: "" },
+
+];
+
+// JORNADAS SEGUNDA DIVISIÓN
+const JORNADAS_SEGUNDA = [
+  { local: "UNI", logoLocal: LOGOS.UNI, visitante: "CUC", logoVisit: LOGOS.CUC, fecha: "20/01/2025", hora: "15:00", resultado: "" },
+  { local: "HUI", logoLocal: LOGOS.HUI, visitante: "BOY", logoVisit: LOGOS.BOY, fecha: "20/01/2025", hora: "17:00", resultado: "" },
+  { local: "PET", logoLocal: LOGOS.PET, visitante: "LLA", logoVisit: LOGOS.LLA, fecha: "21/01/2025", hora: "15:00", resultado: "" }
+];
+
+// GOLEADORES
+const GOLEADORES = [
+  { jugador: "Por definir", equipo: "Atlético Nacional", logo: LOGOS.NAL, goles: 0 },
+  { jugador: "Por definir", equipo: "Millonarios", logo: LOGOS.MIL, goles: 0 },
+  { jugador: "Por definir", equipo: "América de Cali", logo: LOGOS.AME, goles: 0 },
+  { jugador: "Por definir", equipo: "Junior", logo: LOGOS.JUN, goles: 0 },
+  { jugador: "Por definir", equipo: "Santa Fe", logo: LOGOS.SFE, goles: 0 }
+];
+
+// ASISTENCIAS
+const ASISTENCIAS = [
+  { jugador: "Por definir", equipo: "Deportivo Cali", logo: LOGOS.CAL, asistencias: 0 },
+  { jugador: "Por definir", equipo: "Once Caldas", logo: LOGOS.ONC, asistencias: 0 },
+  { jugador: "Por definir", equipo: "Tolima", logo: LOGOS.TOL, asistencias: 0 },
+  { jugador: "Por definir", equipo: "La Equidad", logo: LOGOS.EQU, asistencias: 0 },
+  { jugador: "Por definir", equipo: "Bucaramanga", logo: LOGOS.BUC, asistencias: 0 }
+];
+
+// PORTERÍAS EN CERO
+const CLEAN_SHEETS = [
+  { portero: "Por definir", equipo: "Águilas Doradas", logo: LOGOS.AGU, cs: 0 },
+  { portero: "Por definir", equipo: "Fortaleza CEIF", logo: LOGOS.FOR, cs: 0 },
+  { portero: "Por definir", equipo: "Envigado", logo: LOGOS.ENV, cs: 0 },
+  { portero: "Por definir", equipo: "Medellín", logo: LOGOS.MED, cs: 0 },
+  { portero: "Por definir", equipo: "Pereira", logo: LOGOS.PER, cs: 0 }
+];
+
+// TARJETAS
+const TARJETAS = [
+  { jugador: "Por definir", equipo: "NAL", logo: LOGOS.NAL, fecha: "20/01/2025", tipo: "yellow" },
+  { jugador: "Por definir", equipo: "MIL", logo: LOGOS.MIL, fecha: "20/01/2025", tipo: "yellow" },
+  { jugador: "Por definir", equipo: "AME", logo: LOGOS.AME, fecha: "20/01/2025", tipo: "red" }
+];
+
+// AFILIADOS/PATROCINADORES
+const AFILIADOS = [
+// { nombre: "BetPlay", url: "https://www.betplay.com.co", logo: "https://upload.wikimedia.org/wikipedia/commons/7/74/BetPlay_logo.svg" },
+//  { nombre: "DIMAYOR", url: "https://dimayor.com.co", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Logo_DIMAYOR.svg/250px-Logo_DIMAYOR.svg.png" }
+];
+
+// FUNCIONES DE RENDERIZADO
+
+function sortTabla(a, b) {
+  if (b.pts !== a.pts) return b.pts - a.pts;
+  if (b.dg !== a.dg) return b.dg - a.dg;
+  if (b.gf !== a.gf) return b.gf - a.gf;
+  return a.nombre.localeCompare(b.nombre);
+}
+
+function renderTabla(data, targetId) {
+  const tbody = document.getElementById(targetId);
+  if (!tbody) return;
+  
+  const sorted = [...data].sort(sortTabla);
+  tbody.innerHTML = "";
+  
+  sorted.forEach((team, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${index + 1}</td>
+      <td>
+        <div class="team-cell">
+          <img class="team-logo" src="${team.logo}" alt="${team.nombre}">
+          <span class="team-name">${team.nombre}</span>
+        </div>
+      </td>
+      <td>${team.pj}</td>
+      <td>${team.g}</td>
+      <td>${team.e}</td>
+      <td>${team.p}</td>
+      <td>${team.gf}</td>
+      <td>${team.gc}</td>
+      <td>${team.dg >= 0 ? '+' : ''}${team.dg}</td>
+      <td><span class="points">${team.pts}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderJornadas(data, targetId) {
+  const container = document.getElementById(targetId);
+  if (!container) return;
+  
+  container.innerHTML = "";
+  
+  data.forEach(match => {
+    const card = document.createElement('div');
+    card.className = 'match-card';
+    
+    const vsContent = match.resultado 
+      ? `<div class="match-score">${match.resultado}</div>`
+      : '<div class="match-vs">VS</div>';
+    
+    card.innerHTML = `
+      <div class="match-team">
+        <img class="match-logo" src="${match.logoLocal}" alt="${match.local}">
+        <span class="match-name">${match.local}</span>
+      </div>
+      ${vsContent}
+      <div class="match-team away">
+        <img class="match-logo" src="${match.logoVisit}" alt="${match.visitante}">
+        <span class="match-name">${match.visitante}</span>
+      </div>
+      <div class="match-info">
+        <div class="match-date">${match.fecha}</div>
+        <div class="match-time">${match.hora}</div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function renderGoleadores() {
+  const tbody = document.getElementById('tablaGoleadores');
+  if (!tbody) return;
+  
+  tbody.innerHTML = "";
+  GOLEADORES.forEach((player, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${index + 1}</td>
+      <td>
+        <div class="team-cell">
+          <img class="team-logo" src="${player.logo}" alt="${player.equipo}">
+          <span class="team-name">${player.jugador}</span>
+        </div>
+      </td>
+      <td>${player.equipo}</td>
+      <td><span class="points">${player.goles}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderAsistencias() {
+  const tbody = document.getElementById('tablaAsistencias');
+  if (!tbody) return;
+  
+  tbody.innerHTML = "";
+  ASISTENCIAS.forEach((player, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${index + 1}</td>
+      <td>
+        <div class="team-cell">
+          <img class="team-logo" src="${player.logo}" alt="${player.equipo}">
+          <span class="team-name">${player.jugador}</span>
+        </div>
+      </td>
+      <td>${player.equipo}</td>
+      <td><span class="points">${player.asistencias}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderCleanSheets() {
+  const tbody = document.getElementById('tablaCS');
+  if (!tbody) return;
+  
+  tbody.innerHTML = "";
+  CLEAN_SHEETS.forEach((player, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${index + 1}</td>
+      <td>
+        <div class="team-cell">
+          <img class="team-logo" src="${player.logo}" alt="${player.equipo}">
+          <span class="team-name">${player.portero}</span>
+        </div>
+      </td>
+      <td>${player.equipo}</td>
+      <td><span class="points">${player.cs}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderTarjetas() {
+  const container = document.getElementById('tarjetasContainer');
+  if (!container) return;
+  
+  container.innerHTML = "";
+  TARJETAS.forEach(card => {
+    const item = document.createElement('div');
+    item.className = 'card-item';
+    item.innerHTML = `
+      <img class="card-icon" src="${CARD_ICONS[card.tipo]}" alt="${card.tipo}">
+      <div class="card-info">
+        <div class="card-player">${card.jugador}</div>
+        <div class="card-club">
+          <img class="card-club-logo" src="${card.logo}" alt="${card.equipo}">
+          <span>${card.equipo}</span>
+        </div>
+        <div class="card-date">${card.fecha}</div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+function renderAfiliados() {
+  const container = document.getElementById('afiliadosContainer');
+  if (!container) return;
+  
+  container.innerHTML = "";
+  AFILIADOS.forEach(sponsor => {
+    const card = document.createElement('a');
+    card.className = 'sponsor-card';
+    card.href = sponsor.url;
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+    card.innerHTML = `<img class="sponsor-img" src="${sponsor.logo}" alt="${sponsor.nombre}">`;
+    container.appendChild(card);
+  });
+}
+
+// NAVEGACIÓN
+function switchSection(sectionId) {
+  document.querySelectorAll('.section').forEach(section => {
+    section.classList.remove('active');
+  });
+  
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  const targetSection = document.getElementById(sectionId);
+  if (targetSection) {
+    targetSection.classList.add('active');
+  }
+  
+  const activeBtn = document.querySelector(`[data-section="${sectionId}"]`);
+  if (activeBtn) {
+    activeBtn.classList.add('active');
+  }
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// INICIALIZACIÓN
+document.addEventListener('DOMContentLoaded', () => {
+  // Configurar navegación
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const section = btn.getAttribute('data-section');
+      switchSection(section);
+    });
+  });
+  
+  // Renderizar datos iniciales
+  renderTabla(PRIMERA_DIVISION, 'tablaPrimera');
+  renderTabla(SEGUNDA_DIVISION, 'tablaSegunda');
+  renderJornadas(JORNADAS_PRIMERA, 'jornadasPrimera');
+  renderJornadas(JORNADAS_SEGUNDA, 'jornadasSegunda');
+  renderGoleadores();
+  renderAsistencias();
+  renderCleanSheets();
+  renderTarjetas();
+  renderAfiliados();
+});
+</script>
+</body>
+</html>
